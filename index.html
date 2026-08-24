@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#111318">
+  <meta name="description" content="Jackson 的无广告离线节拍器">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Jackson 节拍器">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <title>Jackson 节拍器</title>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">练琴工具</div>
+        <h1>Jackson 节拍器</h1>
+      </div>
+      <button id="installBtn" class="ghost hidden" type="button">安装</button>
+    </header>
+
+    <section class="card tempo-card">
+      <div class="beat-row" aria-label="当前拍号">
+        <div class="beat-dot" id="beatDot"></div>
+        <span id="beatText">第 1 拍</span>
+      </div>
+      <button class="tempo-display" id="tempoDisplay" type="button" aria-label="点击输入 BPM">
+        <span id="bpmValue">80</span>
+        <small>BPM</small>
+      </button>
+      <div class="tempo-controls">
+        <button id="minus5" class="round" type="button">−5</button>
+        <input id="tempoSlider" type="range" min="30" max="300" value="80" aria-label="BPM">
+        <button id="plus5" class="round" type="button">+5</button>
+      </div>
+      <button id="startBtn" class="start" type="button"><span id="startIcon">▶</span><span id="startText">开始</span></button>
+    </section>
+
+    <section class="grid">
+      <div class="card setting">
+        <label for="meter">拍号</label>
+        <select id="meter">
+          <option value="2">2/4</option>
+          <option value="3">3/4</option>
+          <option value="4" selected>4/4</option>
+          <option value="5">5/4</option>
+          <option value="6">6/8</option>
+          <option value="7">7/8</option>
+          <option value="9">9/8</option>
+          <option value="12">12/8</option>
+        </select>
+      </div>
+      <div class="card setting">
+        <label for="subdivision">细分</label>
+        <select id="subdivision">
+          <option value="1" selected>四分音符</option>
+          <option value="2">八分音符</option>
+          <option value="4">十六分音符</option>
+          <option value="3">三连音</option>
+        </select>
+      </div>
+      <div class="card setting">
+        <label for="sound">声音</label>
+        <select id="sound">
+          <option value="click" selected>清脆</option>
+          <option value="wood">木质</option>
+          <option value="soft">柔和</option>
+        </select>
+      </div>
+      <div class="card setting">
+        <label for="volume">音量 <span id="volumeValue">70%</span></label>
+        <input id="volume" type="range" min="0" max="100" value="70" aria-label="音量">
+      </div>
+    </section>
+
+    <section class="card utility">
+      <button id="tapBtn" class="utility-btn" type="button"><strong>TAP</strong><span>跟着音乐点几下</span></button>
+      <button id="wakeBtn" class="utility-btn" type="button"><strong>☀</strong><span>保持屏幕常亮</span></button>
+      <button id="settingsBtn" class="utility-btn" type="button"><strong>⚙</strong><span>设置</span></button>
+    </section>
+
+    <p class="offline"><span></span> 无广告 · 无追踪 · 可离线使用</p>
+  </main>
+
+  <dialog id="bpmDialog">
+    <form method="dialog" id="bpmForm">
+      <h2>输入 BPM</h2>
+      <input id="bpmInput" inputmode="numeric" type="number" min="30" max="300" value="80">
+      <div class="dialog-actions"><button value="cancel" class="secondary">取消</button><button id="bpmOk" value="default" class="primary">确定</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="settingsDialog">
+    <form method="dialog">
+      <h2>设置</h2>
+      <label class="check"><input id="accentToggle" type="checkbox" checked> 第一拍重音</label>
+      <label class="check"><input id="vibrateToggle" type="checkbox"> 每拍轻微震动（设备支持时）</label>
+      <div class="dialog-actions"><button value="default" class="primary">完成</button></div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
